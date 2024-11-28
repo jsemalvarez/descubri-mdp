@@ -8,7 +8,7 @@ export const PublicRoutes = () => {
         <Routes>
             <Route path="/home" element={ <HomePage /> } />
 
-            <Route path="/auth" element={ <AuthRoutes /> } />
+            <Route path="/auth/*" element={ <AuthRoutes /> } />
             
             <Route path="/*" element={ <Navigate to="/home" /> } />
         </Routes>
