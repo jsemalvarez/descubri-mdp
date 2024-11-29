@@ -1,24 +1,12 @@
-import React, { useState } from "react";
-import { CustomInput } from "../../../common";
+import { CustomInput, useForm } from "../../../common";
 import './LoginPage.css'
 
 export const LoginPage = () => {
 
-  const [ formData, setFormData ] = useState({
+  const { formState: formData, onInputChange} = useForm({
     email: '',
     password: ''
-  });
-
-  const onInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setFormData( (state) => {
-      return {
-        ...state,
-        [name]: value
-      }
-    });
-  }
+  })
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
