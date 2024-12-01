@@ -10,9 +10,9 @@ export const PrivateRoutes = () => {
             <Route path="/home" element={ <HomePage /> } />
 
             <Route path='/users/*' element={ < UserRoutes />} />
-            <Route path='/place/*' element={ < PlacesRoutes />} />
+            <Route path='/places/*' element={ < PlacesRoutes />} />
             
-            <Route path="/*" element={ <Navigate to="/home" /> } />
+            <Route path="/*" element={ <Navigate to="/places/list" /> } />
         </Routes>
     )
 }

@@ -1,15 +1,21 @@
 import { CustomInput, useForm } from "../../../common";
+import { useAuth } from "../hooks/useAuth";
 import './LoginPage.css'
+
+const initialForm = {
+  email: '',
+  password: ''
+}
 
 export const LoginPage = () => {
 
-  const { formState: formData, onInputChange} = useForm({
-    email: '',
-    password: ''
-  })
+  const { formState: formData, onInputChange} = useForm(initialForm)
+
+  const { onLogin } = useAuth({})
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    onLogin({ email: formData.email, password: formData.password })
   }
 
   return (

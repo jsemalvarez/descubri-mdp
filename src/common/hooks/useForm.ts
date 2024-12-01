@@ -1,5 +1,13 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 
+/**
+ * 
+ * formValidation example
+ * {
+ *  name: [(value) => { valies.length > 1 }, 'mensaje de error'],
+ * }
+ * 
+ */
 
 type ValidationFunction = (value: string) => boolean;
 type ValidateRule = [ValidationFunction, string];
