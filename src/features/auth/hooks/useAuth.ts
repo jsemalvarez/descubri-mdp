@@ -1,21 +1,37 @@
 
-import { useDispatch, useSelector } from "react-redux"
-import type { RootState } from "../../../app/state/store"
-import { AuthUser, onChecking, onLogin, onLogout } from "../../../app/state/authSlice";
+
+import { authService } from '../sevices/authService';
+import { useAuthActions } from "../../../app/state";
+import { UseAuthParams, UserLogin } from '../interfaces/auth.interface';
 
 
-export const useAuth = () => {
 
-    const { status, user, errorMessage } = useSelector( (state: RootState) => state.auth);
-    const dispatch = useDispatch();
+export const useAuth = ({ 
+    service = authService,
+    authActions = useAuthActions
+}: UseAuthParams) => {
 
-    const startLogin = (user: AuthUser) => {
-        dispatch( onChecking() );
-        dispatch( onLogin(user) );
+    const { status, user, errorMessage, doChecking, doLogin, doLogout  } = authActions();
+    const { startLogin, startLogout} = service;
+
+    const onLogin = async(user: UserLogin) => {
+        try {
+            doChecking()
+            const userLogged = await startLogin(user.email, user.password);
+            doLogin(userLogged)            
+        } catch (error) {
+            doLogout('Error')
+        }
     }
 
-    const startLogout = () => {
-        dispatch( onLogout(null) );
+    const onLogout = () => {
+        try {
+            doChecking();
+            startLogout();
+            doLogout(null)     
+        } catch (error) {
+            doLogout('Error')
+        }
     }
 
 
@@ -23,7 +39,7 @@ export const useAuth = () => {
         status, 
         user, 
         errorMessage,
-        startLogin,
-        startLogout
+        onLogin,
+        onLogout
     }
 }

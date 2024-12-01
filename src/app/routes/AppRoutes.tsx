@@ -6,7 +6,7 @@ import { useAuth } from "../../features/auth";
 export const AppRouter = () => {
 
     // const authStatus: string = 'authenticated'; // 'authenticated'; // 'not-authenticated';
-    const { status: authStatus } = useAuth()
+    const { status: authStatus } = useAuth({})
 
     if(authStatus === 'CHECKING'){
         return(<p>
