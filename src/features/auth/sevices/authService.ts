@@ -1,13 +1,16 @@
+import { loginWithEmailPassword } from "../../../app/firebase/authProvider";
 import { AuthService, AuthUser } from "../interfaces/auth.interface";
 
 
 const startLogin = async(email: string, password: string):Promise<AuthUser> => {
     console.log({email, password})
 
+    const { uid } = await loginWithEmailPassword(email, password)
+
     return {
-        id:'abc',
+        id: uid,
         name:'josema',
-        email:'josema@gmail.com'
+        email: email
     }
 }
 
